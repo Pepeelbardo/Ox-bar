@@ -606,49 +606,87 @@ a:hover { text-decoration: underline; }
   font-weight: 700;
 }
 
-/* ---------- Facebook feed ---------- */
+/* ---------- From our Facebook ---------- */
 .fb-section {
   padding: 80px 0;
   background: var(--black-soft);
   border-top: 1px solid rgba(239, 166, 46, 0.2);
 }
 
-.fb-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: center;
+.fb-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px 32px;
+  margin-bottom: 32px;
 }
-
-.fb-text p { color: var(--cream); font-size: 1.05rem; margin: 0 0 24px; }
+.fb-head .section-title { margin-bottom: 8px; }
+.fb-head p { color: var(--cream); margin: 0; }
 .fb-btn { display: inline-flex; align-items: center; gap: 10px; }
 
-.fb-embed {
-  display: flex;
-  justify-content: center;
-  background: #fff;
-  border-radius: var(--radius);
-  border: 2px solid var(--gold);
-  overflow: hidden;
-  max-width: 500px;
-  width: 100%;
-  margin-left: auto;
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
-.fb-embed { position: relative; }
-.fb-embed iframe { position: relative; z-index: 1; border: 0; width: 100%; max-width: 500px; height: 600px; }
-/* Queda detrás del iframe: solo se ve si Facebook no carga */
-.fb-fallback {
-  position: absolute;
-  inset: 0;
+
+.post-card {
   display: flex;
+  flex-direction: column;
+  background: var(--black-card);
+  border: 1px solid rgba(239, 166, 46, 0.3);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.post-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+
+.post-media {
+  display: block;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--black);
+}
+.post-media img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+/* Tarjeta sin foto: bloque dorado con el dato principal */
+.post-media--text {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 24px;
+  background: var(--gold);
+  color: var(--black);
   text-align: center;
-  color: #333;
-  font-weight: 500;
+  padding: 24px;
 }
-.fb-fallback a { color: #1a5fd0; margin-left: 4px; }
+.post-big { font-size: clamp(4rem, 9vw, 6rem); font-weight: 800; line-height: 1; }
+.post-big-sub {
+  margin-top: 8px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.9rem;
+}
+
+.post-body { display: flex; flex-direction: column; gap: 6px; padding: 20px; flex: 1; }
+.post-tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+.post-body h3 {
+  margin: 0;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 1.05rem;
+}
+.post-body p { margin: 0; color: var(--text-muted); font-size: 0.92rem; flex: 1; }
+.post-link { margin-top: 8px; font-weight: 700; font-size: 0.9rem; }
 
 /* ---------- Footer socials ---------- */
 .socials { display: flex; justify-content: center; gap: 12px; margin: 16px 0; }
@@ -694,8 +732,7 @@ a:hover { text-decoration: underline; }
   .sub-split { grid-template-columns: 1fr; }
   .menu-split.three { grid-template-columns: 1fr; }
   .meat-grid { grid-template-columns: repeat(2, 1fr); }
-  .fb-grid { grid-template-columns: 1fr; }
-  .fb-embed { margin: 0 auto; }
+  .post-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
   .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
 }
 
